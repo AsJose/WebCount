@@ -1,52 +1,96 @@
-// Selección de elementos del DOM
-const form = document.getElementById('transaction-form');
-const tableBody = document.getElementById('transaction-table');
+const form = document.getElementById('moneyForm');
+const tipoSelect = document.getElementById('tipo');
+const categoriaSelect = document.getElementById('categoria');
+const montoInput = document.getElementById('monto');
+const operationsList = document.getElementById('operationsList');
+const totalSummary = document.getElementById('totalSummary');
+const ctx = document.getElementById('moneyChart').getContext('2d');
 
-// Array para almacenar transacciones en memoria
-let transactions = [];
+// Variables para guardar totales
+let totalIngreso = 0;
+let totalGasto = 0;
+let totalPrestamo = 0;
+let operaciones = [];
 
-// Función para agregar una transacción
-function addTransaction(description, amount, type) {
-  const transaction = { description, amount: parseFloat(amount), type };
-  transactions.push(transaction);
-  renderTable();
-}
+// Configuración de la gráfica
+const moneyChart = new Chart(ctx, {
+  type: 'bar',
+  data: {
+    labels: ['Ingresos', 'Gastos', 'Préstamos'],
+    datasets: [{
+      label: 'Monto',
+      data: [0, 0, 0], // Datos iniciales
+      backgroundColor: ['green', 'red', 'blue'],
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+    },
+  },
+});
 
-// Función para renderizar la tabla de transacciones
-function renderTable() {
-  tableBody.innerHTML = ''; // Limpiar la tabla antes de renderizar
+// Cambiar las opciones dinámicamente según el tipo seleccionado
+tipoSelect.addEventListener('change', (e) => {
+  const tipo = e.target.value;
+  categoriaSelect.innerHTML = ''; // Limpiar opciones previas
 
-  transactions.forEach((transaction, index) => {
-    const row = document.createElement('tr');
+  let opciones = [];
+  if (tipo === 'ingreso') {
+    opciones = ['Papá', 'Mamá', 'Transferencia', 'Pago Préstamo'];
+  } else if (tipo === 'gasto') {
+    opciones = ['Comida', 'Ropa', 'Gasolina'];
+  } else if (tipo === 'prestamo') {
+    opciones = ['Amigo', 'Banco', 'Familiar'];
+  }
 
-    row.innerHTML = `
-      <td>${transaction.description}</td>
-      <td>${transaction.amount.toFixed(2)}</td>
-      <td>${transaction.type}</td>
-      <td>
-        <button onclick="deleteTransaction(${index})">Eliminar</button>
-      </td>
-    `;
+  opciones.forEach(opcion => {
+    const optionElement = document.createElement('option');
+    optionElement.value = opcion.toLowerCase();
+    optionElement.textContent = opcion;
+    categoriaSelect.appendChild(optionElement);
+  });
+});
 
-    tableBody.appendChild(row);
+// Función para mostrar las operaciones en la lista
+function mostrarOperaciones(ops) {
+  operationsList.innerHTML = ''; // Limpiar la lista
+  ops.forEach((op) => {
+    const li = document.createElement('li');
+    li.textContent = `${op.tipo.toUpperCase()} - ${op.categoria}: $${op.monto}`;
+    operationsList.appendChild(li);
   });
 }
 
-// Función para eliminar una transacción por índice
-function deleteTransaction(index) {
-  transactions.splice(index, 1);
-  renderTable();
-}
-
-// Evento de envío del formulario
+// Registrar operación
 form.addEventListener('submit', (e) => {
-  e.preventDefault(); // Prevenir recarga de la página
+  e.preventDefault(); // Evitar recarga
 
-  const description = document.getElementById('description').value;
-  const amount = document.getElementById('amount').value;
-  const type = document.getElementById('type').value;
+  const tipo = tipoSelect.value;
+  const categoria = categoriaSelect.value;
+  const monto = parseFloat(montoInput.value);
 
-  addTransaction(description, amount, type);
+  if (tipo && categoria && monto) {
+    // Agregar operación al arreglo
+    operaciones.push({ tipo, categoria, monto });
 
-  form.reset(); // Limpiar el formulario
+    // Actualizar totales
+    if (tipo === 'ingreso') totalIngreso += monto;
+    if (tipo === 'gasto') totalGasto += monto;
+    if (tipo === 'prestamo') totalPrestamo += monto;
+
+    // Actualizar la lista y la gráfica
+    mostrarOperaciones(operaciones);
+    moneyChart.data.datasets[0].data = [totalIngreso, totalGasto, totalPrestamo];
+    moneyChart.update();
+
+    // Actualizar el resumen
+    totalSummary.textContent = `Total Ingresos: $${totalIngreso} | Total Gastos: $${totalGasto} | Total Préstamos: $${totalPrestamo}`;
+
+    // Limpiar formulario
+    form.reset();
+  }
 });

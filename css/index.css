@@ -1,78 +1,111 @@
-ingreso {
-    color: #ff0000;
+/* Reset general para evitar márgenes innecesarios */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Reset de márgenes y fuente básica */
-* {
-    margin: 0;
-    padding: 10;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-  }
-  
-  body {
-    background-color: #f4f4f4;
-    padding: 20px;
-  }
-  
-  header {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  main {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  #form-section {
-    background-color: #ffffff;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(211, 31, 31, 0.1);
-    margin-bottom: 20px;
-  }
-  .titulo {
-        color :brown;
-        font-size: 25px;
-  }
+/* Estructura del body para layout horizontal */
+body {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: #f4f6f8;
+}
 
-  input, select, button {
-    display: block;
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-  }
-  
-  button {
-    background-color: #283ba7;
-    color: white;
-    border-radius: 20px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: #20217a;
-  }
-  
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 0px;
+/* Estilo de la barra lateral */
+.sidebar {
+  width: 200px;
+  background-color: #4C4F52;
+  color: white;
+  padding: 20px;
+  position: fixed;
+  height: 100%;
+  overflow-y: auto;
+}
 
-  }
+.sidebar h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+}
+
+.sidebar li {
+  margin: 15px 0;
+  cursor: pointer;
+}
+
+/* Contenedor del contenido principal */
+.content {
+  flex-grow: 1; /* Permite que este contenedor ocupe todo el espacio restante */
+  margin-left: 200px;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Cabecera del contenido */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header input {
+  padding: 8px;
+  width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.user-icon {
+  background-color: #4C4F52;
+  color: white;
+  padding: 10px 10px;
+  border-radius: 50%;
   
-  th, td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  th {
-    background-color: #ee0303;
-    color: white;
-    
-  }
-  
+}
+
+/* Formulario de registro de dinero */
+.register-money {
+  margin-bottom: 30px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+button {
+  background-color: #4C4F52;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: #3a3d40;
+}
+
+/* Gráfica */
+.charts {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+canvas {
+  width: 100% !important;
+  max-width: 600px;
+  height: auto !important;
+  margin: 0 auto;
+}

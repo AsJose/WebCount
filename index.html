@@ -3,48 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Registro de Cuentas Personales</title>
+  <title>Registro de Dinero</title>
   <link rel="stylesheet" href="css/index.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <header>
-    <h1>Registro de Cuentas Personales</h1>
-  </header>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      <li>Registro Dinero</li>
+      <li>Filtros</li>
+      <li>Components</li>
+      <li>Forms</li>
+      <li>Tables</li>
+      <li>Charts</li>
+    </ul>
+  </div>
 
-  <main>
-    <!-- Formulario para agregar transacciones -->
-    <section id="form-section">
-      <h2 class="titulo">  Agregar Transacción</h2>
-      <form id="transaction-form">
-        <input type="text" id="description" placeholder="Descripción" required />
-        <input type="float" id="amount" placeholder="Monto" required />
-        <select id="type">
+  <div class="content">
+    <div class="header">
+      <div class="user-icon">ES</div>
+    </div>
+
+    <!-- Formulario de Registro Dinero -->
+    <div class="register-money">
+      <h3>Registro de Dinero</h3>
+      <form id="moneyForm">
+        <label for="tipo">Tipo:</label>
+        <select id="tipo" required>
+          <option value="" disabled selected>Selecciona una opción</option>
           <option value="ingreso">Ingreso</option>
           <option value="gasto">Gasto</option>
-          <option value="gasto">Prestamo</option>
+          <option value="prestamo">Préstamo</option>
         </select>
-        <button style="color: rgb(255, 255, 255);" type="submit">Agregar</button>
-      </form>
-    </section>
 
-    <!-- Tabla para mostrar transacciones -->
-    <section id="table-section">
-      <h2>Transacciones</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>Descripción</th>
-            <th>Monto</th>
-            <th>Tipo</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody id="transaction-table">
-          <!-- Las transacciones se mostrarán aquí -->
-        </tbody>
-      </table>
-    </section>
-  </main>
+        <label for="categoria">Categoría:</label>
+        <select id="categoria" required>
+          <option value="" disabled selected>Selecciona una categoría</option>
+        </select>
+
+        <label for="monto">Monto:</label>
+        <input type="number" id="monto" placeholder="Ingrese el monto" required>
+
+        <button type="submit">Registrar</button>
+      </form>
+
+      <h4>Operaciones registradas:</h4>
+      <ul id="operationsList"></ul>
+    </div>
+
+    <!-- Gráfica de Ingresos y Gastos -->
+    <div class="charts">
+      <canvas id="moneyChart"></canvas>
+      <h4 id="totalSummary"></h4>
+    </div>
+  </div>
 
   <script src="java/app.js"></script>
 </body>
