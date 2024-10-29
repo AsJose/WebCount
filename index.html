@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registro de Cuentas Personales</title>
+  <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+  <header>
+    <h1>Registro de Cuentas Personales</h1>
+  </header>
+
+  <main>
+    <!-- Formulario para agregar transacciones -->
+    <section id="form-section">
+      <h2 class="titulo">  Agregar Transacción</h2>
+      <form id="transaction-form">
+        <input type="text" id="description" placeholder="Descripción" required />
+        <input type="float" id="amount" placeholder="Monto" required />
+        <select id="type">
+          <option value="ingreso">Ingreso</option>
+          <option value="gasto">Gasto</option>
+          <option value="gasto">Prestamo</option>
+        </select>
+        <button style="color: rgb(255, 255, 255);" type="submit">Agregar</button>
+      </form>
+    </section>
+
+    <!-- Tabla para mostrar transacciones -->
+    <section id="table-section">
+      <h2>Transacciones</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Descripción</th>
+            <th>Monto</th>
+            <th>Tipo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody id="transaction-table">
+          <!-- Las transacciones se mostrarán aquí -->
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="java/app.js"></script>
+</body>
+</html>
