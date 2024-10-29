@@ -56,7 +56,8 @@ body {
 
 .header input {
   padding: 8px;
-  width: 300px;
+  width: 100%; /* Cambia a 100% para hacer que el input ocupe todo el ancho disponible */
+  max-width: 300px; /* Limita el ancho máximo */
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -66,7 +67,6 @@ body {
   color: white;
   padding: 10px 10px;
   border-radius: 50%;
-  
 }
 
 /* Formulario de registro de dinero */
@@ -103,9 +103,41 @@ button:hover {
   margin-top: 20px;
 }
 
+/* Estilos específicos para el canvas */
 canvas {
   width: 100% !important;
-  max-width: 600px;
+  max-width: 600px; /* Máximo ancho del canvas */
   height: auto !important;
   margin: 0 auto;
+}
+
+/* Media Queries para pantallas pequeñas */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 100%; /* La barra lateral ocupa todo el ancho */
+    position: relative; /* La barra lateral ya no está fija */
+    height: auto; /* Ajusta la altura */
+  }
+
+  .content {
+    margin-left: 0; /* Sin margen en dispositivos móviles */
+    padding: 10px; /* Menos padding */
+  }
+
+  .header input {
+    max-width: 100%; /* Permite que el input use todo el ancho en móviles */
+  }
+  
+  button {
+    padding: 8px; /* Menos padding en botones para pantallas pequeñas */
+  }
+
+  .register-money {
+    margin-bottom: 20px; /* Menos margen inferior */
+  }
+
+  /* Ajusta tamaños de texto si es necesario */
+  h3, h4 {
+    font-size: 1.2em; /* Texto más pequeño en móviles */
+  }
 }
