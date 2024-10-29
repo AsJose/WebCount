@@ -44,7 +44,7 @@ tipoSelect.addEventListener('change', (e) => {
   } else if (tipo === 'gasto') {
     opciones = ['Comida', 'Ropa', 'Gasolina'];
   } else if (tipo === 'prestamo') {
-    opciones = ['Amigo', 'Banco', 'Familiar'];
+    opciones = ['Papá', 'Mamá', 'Amigo'];
   }
 
   opciones.forEach(opcion => {
@@ -88,7 +88,7 @@ form.addEventListener('submit', (e) => {
     moneyChart.update();
 
     // Actualizar el resumen
-    totalSummary.textContent = `Total Ingresos: $${totalIngreso} | Total Gastos: $${totalGasto} | Total Préstamos: $${totalPrestamo}`;
+    totalSummary.textContent = `Total Ingresos: $${totalIngreso} | Total Gastos: $${totalGasto} | Total Préstamos: $${totalPrestamo} | Dinero Total: $${totalIngreso-totalGasto-totalPrestamo}`;
 
     // Limpiar formulario
     form.reset();
